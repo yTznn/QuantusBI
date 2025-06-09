@@ -1,0 +1,77 @@
+@model IEnumerable<QuantusBI.Models.Orgao>
+
+@if (TempData["MensagemSucesso"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <i class="bi bi-check-circle-fill"></i> @TempData["MensagemSucesso"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
+    </div>
+}
+
+@{
+    ViewData["Title"] = "Órgãos Cadastrados";
+}
+
+<h2 class="mt-4 mb-3"><i class="bi bi-bank2"></i> @ViewData["Title"]</h2>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-info d-flex align-items-center" role="alert">
+        <i class="bi bi-exclamation-circle-fill me-2"></i>
+        Nenhum órgão cadastrado ainda.
+    </div>
+}
+else
+{
+    <div class="table-responsive">
+        <table class="table table-striped table-hover table-bordered align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th><i class="bi bi-building"></i> Nome</th>
+                    <th><i class="bi bi-tag-fill"></i> Sigla</th>
+                    <th><i class="bi bi-credit-card-2-front"></i> CNPJ</th>
+                    <th><i class="bi bi-envelope"></i> E-mail</th>
+                    <th><i class="bi bi-telephone"></i> Telefone</th>
+                    <th><i class="bi bi-check-circle"></i> Status</th>
+                    <th><i class="bi bi-clock-history"></i> Data de Cadastro</th>
+                    <th style="width: 120px;"><i class="bi bi-gear"></i> Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach (var orgao in Model)
+            {
+                <tr>
+                    <td>@orgao.Nome</td>
+                    <td>@orgao.Sigla</td>
+                    <td>@orgao.CNPJ</td>
+                    <td>@orgao.Email</td>
+                    <td>@orgao.Telefone</td>
+                    <td>
+                        @if (orgao.Ativo)
+                        {
+                            <span class="badge bg-success"><i class="bi bi-check-circle"></i> Ativo</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-secondary"><i class="bi bi-dash-circle"></i> Inativo</span>
+                        }
+                    </td>
+                    <td>@orgao.DataCadastro.ToString("dd/MM/yyyy HH:mm")</td>
+                    <td>
+                        <a asp-action="CriarEditar" asp-route-id="@orgao.Id" class="btn btn-sm btn-primary">
+                            <i class="bi bi-pencil-square"></i> Editar
+                        </a>
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+}
+
+<!-- Botão Cadastrar Novo Órgão abaixo da tabela -->
+<div class="d-grid mt-4">
+    <a asp-action="CriarEditar" class="btn btn-success btn-lg">
+        <i class="bi bi-plus-circle"></i> Cadastrar Novo Órgão
+    </a>
+</div>

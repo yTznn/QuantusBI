@@ -15,16 +15,21 @@
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">QuantusBI</a>
+                <a class="navbar-brand" href="/">QuantusBI</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarNav" aria-controls="navbarNav"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <!-- Futuro menu vai aqui -->
+
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-auto">
-                        <!-- Ex: <li class="nav-item"><a class="nav-link" href="#">Dashboard</a></li> -->
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Orgaos" asp-action="Index">Órgãos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Orgaos" asp-action="CriarEditar">Cadastrar Órgão</a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -38,5 +43,7 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js"></script>
+
+    @RenderSection("Scripts", required: false)
 </body>
 </html>

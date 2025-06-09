@@ -18,6 +18,22 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\Elielton Souza\Desktop\quantusbi
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/Elielton Souza/Desktop/quantusbi/Views/Entidades/CriarEditar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW50aWRhZGVzXENyaWFyRWRpdGFyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Elielton Souza/Desktop/quantusbi/Views/Entidades/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW50aWRhZGVzXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Elielton Souza/Desktop/quantusbi/Views/Orgaos/CriarEditar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JnYW9zXENyaWFyRWRpdGFyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Elielton Souza/Desktop/quantusbi/Views/Orgaos/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JnYW9zXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Elielton Souza/Desktop/quantusbi/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 

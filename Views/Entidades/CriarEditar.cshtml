@@ -1,0 +1,85 @@
+@model QuantusBI.ViewModels.EntidadeViewModel
+
+@{
+    ViewData["Title"] = Model.Id == 0 ? "Cadastrar Entidade" : "Atualizar Entidade";
+}
+
+<h2 class="mt-4 mb-3">@ViewData["Title"]</h2>
+
+<form asp-controller="Entidades" asp-action="CriarEditar" method="post">
+    @Html.AntiForgeryToken()
+    <input type="hidden" asp-for="Id" />
+
+    @Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })
+
+    <div class="row">
+        <!-- Nome -->
+        <div class="col-md-6 mb-3">
+            <label asp-for="Nome" class="form-label"></label>
+            <input asp-for="Nome" class="form-control" placeholder="Nome da entidade" />
+            <span asp-validation-for="Nome" class="text-danger"></span>
+        </div>
+
+        <!-- Sigla -->
+        <div class="col-md-6 mb-3">
+            <label asp-for="Sigla" class="form-label"></label>
+            <input asp-for="Sigla" class="form-control" placeholder="Sigla da entidade" />
+            <span asp-validation-for="Sigla" class="text-danger"></span>
+        </div>
+
+        <!-- Endereço -->
+        <div class="col-md-6 mb-3">
+            <label asp-for="Endereco" class="form-label"></label>
+            <input asp-for="Endereco" class="form-control" placeholder="Endereço completo" />
+            <span asp-validation-for="Endereco" class="text-danger"></span>
+        </div>
+
+        <!-- Tipo -->
+        <div class="col-md-6 mb-3">
+            <label asp-for="Tipo" class="form-label"></label>
+            <select asp-for="Tipo" class="form-select" asp-items="Model.TiposDisponiveis">
+                <option value="">-- Selecione --</option>
+            </select>
+            <span asp-validation-for="Tipo" class="text-danger"></span>
+        </div>
+
+        <!-- CNPJ -->
+        <div class="col-md-6 mb-3">
+            <label asp-for="CNPJ" class="form-label"></label>
+            <input asp-for="CNPJ" class="form-control" placeholder="Ex: 00.000.000/0000-00" />
+            <span asp-validation-for="CNPJ" class="text-danger"></span>
+        </div>
+
+        <!-- Órgão Pai -->
+        <div class="col-md-6 mb-3">
+            <label asp-for="OrgaoId" class="form-label"></label>
+            <select asp-for="OrgaoId" class="form-select" asp-items="Model.OrgaosDisponiveis">
+                <option value="">-- Selecione --</option>
+            </select>
+            <span asp-validation-for="OrgaoId" class="text-danger"></span>
+        </div>
+
+        <!-- Ativa -->
+        <div class="col-md-12 form-check mb-3">
+            <input asp-for="Ativa" class="form-check-input" />
+            <label asp-for="Ativa" class="form-check-label"></label>
+        </div>
+    </div>
+
+    <div class="d-flex gap-2">
+        <button type="submit" class="btn btn-primary">
+            <i class="bi bi-save"></i> @ViewData["Title"]
+        </button>
+        <a asp-action="Index" class="btn btn-secondary">
+            <i class="bi bi-x-circle"></i> Cancelar
+        </a>
+    </div>
+</form>
+
+@section Scripts {
+    <script>
+        document.querySelector("form").addEventListener("submit", () =>
+            console.log("🧪 FORM ESTÁ SENDO ENVIADO PELO NAVEGADOR!"));
+    </script>
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

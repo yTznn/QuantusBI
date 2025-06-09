@@ -1,0 +1,86 @@
+@model IEnumerable<QuantusBI.ViewModels.EntidadeViewModel>
+
+@{
+    ViewData["Title"] = "Entidades Cadastradas";
+}
+
+<h2 class="mt-4 mb-3"><i class="bi bi-building-fill-gear"></i> @ViewData["Title"]</h2>
+@Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })
+
+@if (TempData["MensagemSucesso"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <i class="bi bi-check-circle-fill"></i> @TempData["MensagemSucesso"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
+    </div>
+}
+
+@if (!Model.Any())
+{
+    <div class="alert alert-info d-flex align-items-center" role="alert">
+        <i class="bi bi-info-circle-fill me-2"></i>
+        Nenhuma entidade cadastrada.
+    </div>
+}
+else
+{
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th>Nome</th>
+                    <th>Sigla</th>
+                    <th>CNPJ</th>
+                    <th>Tipo</th>
+                    <th>Status</th>
+                    <th>Órgão Pai</th>
+                    <th style="width: 120px;">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach (var entidade in Model)
+            {
+                var cnpjFormatado = string.Format("{0}.{1}.{2}/{3}-{4}",
+                    entidade.CNPJ.Substring(0, 2),
+                    entidade.CNPJ.Substring(2, 3),
+                    entidade.CNPJ.Substring(5, 3),
+                    entidade.CNPJ.Substring(8, 4),
+                    entidade.CNPJ.Substring(12, 2));
+
+                <tr>
+                    <td>@entidade.Nome</td>
+                    <td>@entidade.Sigla</td>
+                    <td>@cnpjFormatado</td>
+                    <td>@entidade.Tipo</td>
+                    <td>
+                        @if (entidade.Ativa)
+                        {
+                            <span class="badge bg-success"><i class="bi bi-check-circle"></i> Ativa</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-secondary"><i class="bi bi-x-circle"></i> Inativa</span>
+                        }
+                    </td>
+                    <td>@entidade.OrgaoSigla</td>
+                    <td>
+                        <a asp-action="CriarEditar" asp-route-id="@entidade.Id" class="btn btn-sm btn-primary">
+                            <i class="bi bi-pencil-square"></i> Editar
+                        </a>
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+}
+
+<div class="d-grid mt-4">
+    <a asp-action="CriarEditar" class="btn btn-success btn-lg">
+        <i class="bi bi-plus-circle"></i> Cadastrar Nova Entidade
+    </a>
+</div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}
