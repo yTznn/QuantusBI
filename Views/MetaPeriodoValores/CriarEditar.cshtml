@@ -1,0 +1,61 @@
+@model QuantusBI.ViewModels.MetaPeriodoValorViewModel
+
+@{
+    ViewData["Title"] = ViewData["Title"] ?? "Gerenciar Lançamento de Valor por Período";
+}
+
+<h2 class="mt-4 mb-3">@ViewData["Title"]</h2>
+
+<form asp-controller="MetaPeriodoValores" asp-action="CriarEditar" method="post">
+    @Html.AntiForgeryToken()
+    <input type="hidden" asp-for="MetaPeriodoValor.Id" />
+
+    @Html.ValidationSummary(false, "", new { @class = "alert alert-danger" })
+
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <label asp-for="MetaPeriodoValor.MetaId" class="form-label"></label>
+            <select asp-for="MetaPeriodoValor.MetaId" class="form-select" asp-items="Model.MetasDisponiveis">
+                <option value="">-- Selecione a Meta --</option>
+            </select>
+            <span asp-validation-for="MetaPeriodoValor.MetaId" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label asp-for="MetaPeriodoValor.ValorAtingido" class="form-label"></label>
+            <input asp-for="MetaPeriodoValor.ValorAtingido" class="form-control" type="number" step="0.01" min="0" placeholder="Ex: 71" />
+            <span asp-validation-for="MetaPeriodoValor.ValorAtingido" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label asp-for="MetaPeriodoValor.DataInicioPeriodo" class="form-label"></label>
+            <input asp-for="MetaPeriodoValor.DataInicioPeriodo" class="form-control" type="date" />
+            <span asp-validation-for="MetaPeriodoValor.DataInicioPeriodo" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label asp-for="MetaPeriodoValor.DataFimPeriodo" class="form-label"></label>
+            <input asp-for="MetaPeriodoValor.DataFimPeriodo" class="form-control" type="date" />
+            <span asp-validation-for="MetaPeriodoValor.DataFimPeriodo" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-12 mb-3">
+            <label asp-for="MetaPeriodoValor.Observacoes" class="form-label"></label>
+            <textarea asp-for="MetaPeriodoValor.Observacoes" class="form-control" rows="3" placeholder="Observações sobre este período..."></textarea>
+            <span asp-validation-for="MetaPeriodoValor.Observacoes" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="d-flex gap-2">
+        <button type="submit" class="btn btn-primary">
+            <i class="bi bi-save"></i> Salvar Lançamento
+        </button>
+        <a asp-action="Index" asp-route-metaId="@Model.MetaPeriodoValor.MetaId" class="btn btn-secondary">
+            <i class="bi bi-x-circle"></i> Cancelar
+        </a>
+    </div>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

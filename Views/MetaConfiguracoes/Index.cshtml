@@ -1,0 +1,53 @@
+@model IEnumerable<QuantusBI.Models.MetaConfiguracao>
+
+@{
+    ViewData["Title"] = "Configurações de Metas";
+}
+
+<h2 class="mb-4">Configurações de Metas</h2>
+
+<a asp-action="Nova" class="btn btn-primary mb-3">Cadastrar Nova Configuração</a>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-info">Nenhuma configuração cadastrada ainda.</div>
+}
+else
+{
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Tipo</th>
+                <th>Expressão</th>
+                <th>Ativa?</th>
+                <th style="width: 120px;">Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var config in Model)
+            {
+                <tr>
+                    <td>@config.Nome</td>
+                    <td>@config.TipoComparacao</td>
+                    <td>@config.ExpressaoCondicional</td>
+                    <td>
+                        @if (config.Ativa)
+                        {
+                            <span class="badge bg-success">Sim</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-secondary">Não</span>
+                        }
+                    </td>
+                    <td>
+                        <a asp-action="Editar" asp-route-id="@config.Id" class="btn btn-sm btn-outline-primary">
+                            Editar
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

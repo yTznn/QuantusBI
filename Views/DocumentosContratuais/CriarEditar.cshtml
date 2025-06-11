@@ -1,0 +1,80 @@
+@model QuantusBI.ViewModels.DocumentoContratualViewModel
+
+@{
+    ViewData["Title"] = ViewData["Title"] ?? "Gerenciar Documento Contratual";
+}
+
+<h2 class="mt-4 mb-3">@ViewData["Title"]</h2>
+
+<form asp-controller="DocumentosContratuais" asp-action="CriarEditar" method="post">
+    @Html.AntiForgeryToken()
+    <input type="hidden" asp-for="DocumentoContratual.Id" />
+
+    @Html.ValidationSummary(false, "", new { @class = "alert alert-danger" }) @* false para exibir todos os erros *@
+
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <label asp-for="DocumentoContratual.EntidadeId" class="form-label"></label>
+            <select asp-for="DocumentoContratual.EntidadeId" class="form-select" asp-items="Model.Entidades">
+                <option value="">-- Selecione a Entidade --</option>
+            </select>
+            <span asp-validation-for="DocumentoContratual.EntidadeId" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label asp-for="DocumentoContratual.TipoContrato" class="form-label"></label>
+            <select asp-for="DocumentoContratual.TipoContrato" class="form-select" asp-items="Model.TiposContrato">
+                <option value="">-- Selecione o Tipo --</option>
+            </select>
+            <span asp-validation-for="DocumentoContratual.TipoContrato" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label asp-for="DocumentoContratual.NumeroContrato" class="form-label"></label>
+            <input asp-for="DocumentoContratual.NumeroContrato" class="form-control" placeholder="Número do Contrato" />
+            <span asp-validation-for="DocumentoContratual.NumeroContrato" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label asp-for="DocumentoContratual.Valor" class="form-label"></label>
+            <input asp-for="DocumentoContratual.Valor" class="form-control" type="number" step="0.01" placeholder="Ex: 1500000.00" />
+            <span asp-validation-for="DocumentoContratual.Valor" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label asp-for="DocumentoContratual.DataInicio" class="form-label"></label>
+            <input asp-for="DocumentoContratual.DataInicio" class="form-control" type="date" />
+            <span asp-validation-for="DocumentoContratual.DataInicio" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label asp-for="DocumentoContratual.DataFim" class="form-label"></label>
+            <input asp-for="DocumentoContratual.DataFim" class="form-control" type="date" />
+            <span asp-validation-for="DocumentoContratual.DataFim" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-12 mb-3">
+            <label asp-for="DocumentoContratual.Observacoes" class="form-label"></label>
+            <textarea asp-for="DocumentoContratual.Observacoes" class="form-control" rows="3" placeholder="Observações adicionais sobre o contrato"></textarea>
+            <span asp-validation-for="DocumentoContratual.Observacoes" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-12 form-check mb-3">
+            <input asp-for="DocumentoContratual.Status" class="form-check-input" />
+            <label asp-for="DocumentoContratual.Status" class="form-check-label"></label>
+        </div>
+    </div>
+
+    <div class="d-flex gap-2">
+        <button type="submit" class="btn btn-primary">
+            <i class="bi bi-save"></i> Salvar Documento
+        </button>
+        <a asp-action="Index" class="btn btn-secondary">
+            <i class="bi bi-x-circle"></i> Cancelar
+        </a>
+    </div>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

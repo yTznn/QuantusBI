@@ -18,12 +18,60 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\Elielton Souza\Desktop\quantusbi
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/Elielton Souza/Desktop/quantusbi/Views/Dashboard/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGFzaGJvYXJkXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Elielton Souza/Desktop/quantusbi/Views/DocumentosContratuais/CriarEditar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9jdW1lbnRvc0NvbnRyYXR1YWlzXENyaWFyRWRpdGFyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Elielton Souza/Desktop/quantusbi/Views/DocumentosContratuais/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9jdW1lbnRvc0NvbnRyYXR1YWlzXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Elielton Souza/Desktop/quantusbi/Views/Entidades/CriarEditar.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW50aWRhZGVzXENyaWFyRWRpdGFyLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Elielton Souza/Desktop/quantusbi/Views/Entidades/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW50aWRhZGVzXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Elielton Souza/Desktop/quantusbi/Views/MetaConfiguracoes/Editar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWV0YUNvbmZpZ3VyYWNvZXNcRWRpdGFyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Elielton Souza/Desktop/quantusbi/Views/MetaConfiguracoes/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWV0YUNvbmZpZ3VyYWNvZXNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Elielton Souza/Desktop/quantusbi/Views/MetaConfiguracoes/Nova.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWV0YUNvbmZpZ3VyYWNvZXNcTm92YS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Elielton Souza/Desktop/quantusbi/Views/MetaFaixaCumprimentos/Gerenciar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWV0YUZhaXhhQ3VtcHJpbWVudG9zXEdlcmVuY2lhci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Elielton Souza/Desktop/quantusbi/Views/MetaFaixaCumprimentos/Nova.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWV0YUZhaXhhQ3VtcHJpbWVudG9zXE5vdmEuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Elielton Souza/Desktop/quantusbi/Views/MetaPeriodoValores/CriarEditar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWV0YVBlcmlvZG9WYWxvcmVzXENyaWFyRWRpdGFyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Elielton Souza/Desktop/quantusbi/Views/MetaPeriodoValores/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWV0YVBlcmlvZG9WYWxvcmVzXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Elielton Souza/Desktop/quantusbi/Views/Metas/CriarEditar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWV0YXNcQ3JpYXJFZGl0YXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Elielton Souza/Desktop/quantusbi/Views/Metas/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWV0YXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Elielton Souza/Desktop/quantusbi/Views/Orgaos/CriarEditar.cshtml]

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("quantusbi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7f1239d3d1553425db7c8fce40f072ca3f767635")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3d899ff25789263e6a69f4401f5aa56d223c4a62")]
 [assembly: System.Reflection.AssemblyProductAttribute("quantusbi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("quantusbi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

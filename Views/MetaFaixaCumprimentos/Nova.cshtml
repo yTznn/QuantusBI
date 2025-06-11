@@ -1,0 +1,37 @@
+@model QuantusBI.Models.ViewModels.MetaFaixaCumprimentoViewModel
+
+@{
+    ViewData["Title"] = "Nova Faixa de Cumprimento";
+}
+
+<h2 class="mb-4">Cadastrar Faixa de Cumprimento</h2>
+
+<form asp-action="Nova" method="post" class="needs-validation" novalidate>
+    <input type="hidden" asp-for="MetaId" />
+
+    <div class="mb-3">
+        <label asp-for="PercentualMinimo" class="form-label"></label>
+        <input asp-for="PercentualMinimo" class="form-control" />
+        <span asp-validation-for="PercentualMinimo" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="PercentualMaximo" class="form-label"></label>
+        <input asp-for="PercentualMaximo" class="form-control" />
+        <small class="text-muted">Deixe em branco para faixas abertas (ex: ≥ 90%)</small>
+        <span asp-validation-for="PercentualMaximo" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="PercentualPagamento" class="form-label"></label>
+        <input asp-for="PercentualPagamento" class="form-control" />
+        <span asp-validation-for="PercentualPagamento" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-success">Salvar Faixa</button>
+    <a asp-action="Gerenciar" asp-route-metaId="@Model.MetaId" class="btn btn-secondary">Cancelar</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,86 @@
+@model IEnumerable<QuantusBI.ViewModels.MetaViewModel>
+
+@{
+    ViewData["Title"] = "Gestão de Metas";
+}
+
+<h2 class="mt-4 mb-3"><i class="bi bi-bullseye"></i> @ViewData["Title"]</h2>
+
+@if (TempData["MensagemSucesso"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <i class="bi bi-check-circle-fill"></i> @TempData["MensagemSucesso"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
+    </div>
+}
+@if (TempData["MensagemErro"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <i class="bi bi-x-circle-fill"></i> @TempData["MensagemErro"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
+    </div>
+}
+
+@if (!Model.Any())
+{
+    <div class="alert alert-info d-flex align-items-center" role="alert">
+        <i class="bi bi-info-circle-fill me-2"></i>
+        Nenhuma meta cadastrada ainda.
+    </div>
+}
+else
+{
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th>Nome da Meta</th>
+                    <th>Contrato</th>
+                    <th>Entidade</th>
+                    <th>Órgão</th>
+                    <th>Volume Mensal</th>
+                    <th>% Contrato</th>
+                    <th>Status</th>
+                    <th style="width: 200px;">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Meta.Nome</td>
+                    <td>@item.DocumentoContratualNumero</td>
+                    <td>@item.EntidadeNome</td>
+                    <td>@item.OrgaoSigla</td>
+                    <td>@item.Meta.VolumePactuadoMensal.ToString("N0")</td>
+                    <td>@item.Meta.PercentualContrato.ToString("N2")%</td>
+                    <td>
+                        @if (item.Meta.Ativa)
+                        {
+                            <span class="badge bg-success"><i class="bi bi-check-circle"></i> Ativa</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-secondary"><i class="bi bi-x-circle"></i> Inativa</span>
+                        }
+                    </td>
+                    <td>
+                        <a asp-action="CriarEditar" asp-route-id="@item.Meta.Id" class="btn btn-sm btn-primary me-1">
+                            <i class="bi bi-pencil-square"></i> Editar
+                        </a>
+                        <a asp-controller="MetaPeriodoValores" asp-action="Index" asp-route-metaId="@item.Meta.Id" class="btn btn-sm btn-info text-white">
+                            <i class="bi bi-list-columns"></i> Lançamentos
+                        </a>
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+}
+
+<div class="d-grid mt-4">
+    <a asp-action="CriarEditar" class="btn btn-success btn-lg">
+        <i class="bi bi-plus-circle"></i> Cadastrar Nova Meta
+    </a>
+</div>

@@ -1,0 +1,44 @@
+@model IEnumerable<QuantusBI.Models.MetaFaixaCumprimento>
+
+@{
+    ViewData["Title"] = "Gerenciar Faixas de Cumprimento";
+    var metaId = ViewBag.MetaId as int? ?? 0;
+    var metaNome = ViewBag.MetaNome as string ?? "Meta Desconhecida";
+}
+
+<h2 class="mb-4">Faixas de Cumprimento – @metaNome</h2>
+
+<a asp-action="Nova" asp-route-metaId="@metaId" class="btn btn-primary mb-3">Adicionar Nova Faixa</a>
+<form asp-action="RemoverTodas" asp-route-metaId="@metaId" method="post" class="d-inline">
+    <button type="submit" class="btn btn-danger mb-3"
+            onclick="return confirm('Tem certeza que deseja remover TODAS as faixas desta meta?')">
+        Remover Todas
+    </button>
+</form>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-info">Nenhuma faixa cadastrada para esta meta.</div>
+}
+else
+{
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Percentual Mínimo (%)</th>
+                <th>Percentual Máximo (%)</th>
+                <th>Percentual de Pagamento (%)</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var faixa in Model)
+        {
+            <tr>
+                <td>@faixa.PercentualMinimo</td>
+                <td>@(faixa.PercentualMaximo.HasValue ? faixa.PercentualMaximo.Value.ToString("0.##") : "Sem limite superior")</td>
+                <td>@faixa.PercentualPagamento</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}

@@ -1,0 +1,119 @@
+@model QuantusBI.ViewModels.DashboardFilterViewModel
+
+@{
+    ViewData["Title"] = "Dashboard de Metas BI";
+}
+
+<h2 class="mt-4 mb-3"><i class="bi bi-bar-chart-fill"></i> @ViewData["Title"]</h2>
+
+@if (TempData["MensagemErro"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <i class="bi bi-x-circle-fill"></i> @TempData["MensagemErro"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
+    </div>
+}
+
+<div class="card mb-4">
+    <div class="card-header">
+        <h5 class="mb-0">Filtros de Análise</h5>
+    </div>
+    <div class="card-body">
+        <form asp-controller="Dashboard" asp-action="Index" method="get">
+            <div class="row g-3 align-items-end">
+                <div class="col-md-3">
+                    <label asp-for="SelectedOrgaoId" class="form-label">Órgão:</label>
+                    @Html.DropDownListFor(m => m.SelectedOrgaoId, Model.Orgaos, "-- Selecione um Órgão --", new { @class = "form-select", onchange = "this.form.submit()" })
+                    @Html.ValidationMessageFor(m => m.SelectedOrgaoId, "", new { @class = "text-danger" }) @* Opcional: para exibir erro individual *@
+                </div>
+                <div class="col-md-3">
+                    <label asp-for="SelectedEntidadeId" class="form-label">Entidade:</label>
+                    @Html.DropDownListFor(m => m.SelectedEntidadeId, Model.Entidades, "-- Selecione uma Entidade --", new { @class = "form-select", onchange = "this.form.submit()" })
+                    @Html.ValidationMessageFor(m => m.SelectedEntidadeId, "", new { @class = "text-danger" }) @* Opcional: para exibir erro individual *@
+                </div>
+                <div class="col-md-3">
+                    <label asp-for="SelectedDocumentoContratualId" class="form-label">Contrato:</label>
+                    @Html.DropDownListFor(m => m.SelectedDocumentoContratualId, Model.DocumentosContratuais, "-- Selecione um Contrato --", new { @class = "form-select", onchange = "this.form.submit()" })
+                    @Html.ValidationMessageFor(m => m.SelectedDocumentoContratualId, "", new { @class = "text-danger" }) @* Opcional: para exibir erro individual *@
+                </div>
+                <div class="col-md-3">
+                    <div class="row">
+                        <div class="col-6">
+                            <label asp-for="SelectedMonth" class="form-label"></label>
+                            @Html.DropDownListFor(m => m.SelectedMonth, Model.AvailableMonths, "-- Mês --", new { @class = "form-select", onchange = "this.form.submit()" })
+                            @Html.ValidationMessageFor(m => m.SelectedMonth, "", new { @class = "text-danger" }) @* Opcional: para exibir erro individual *@
+                        </div>
+                        <div class="col-6">
+                            <label asp-for="SelectedYear" class="form-label"></label>
+                            @Html.DropDownListFor(m => m.SelectedYear, Model.AvailableYears, "-- Ano --", new { @class = "form-select", onchange = "this.form.submit()" })
+                            @Html.ValidationMessageFor(m => m.SelectedYear, "", new { @class = "text-danger" }) @* Opcional: para exibir erro individual *@
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 d-flex justify-content-end">
+                    <button type="submit" class="btn btn-primary me-2">
+                        <i class="bi bi-funnel-fill"></i> Aplicar Filtros
+                    </button>
+                    <a asp-action="Index" class="btn btn-secondary">
+                        <i class="bi bi-x-circle"></i> Limpar Filtros
+                    </a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@if (!Model.Metas.Any())
+{
+    <div class="alert alert-info d-flex align-items-center" role="alert">
+        <i class="bi bi-info-circle-fill me-2"></i>
+        Nenhum dado de meta encontrado para os filtros selecionados.
+    </div>
+}
+else
+{
+    <div class="row">
+        @foreach (var meta in Model.Metas)
+        {
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card h-100 shadow-sm border-@((meta.PercentualRecebimento == 100) ? "success" : (meta.PercentualRecebimento >= 80 ? "warning" : "danger"))">
+                    <div class="card-header bg-@((meta.PercentualRecebimento == 100) ? "success" : (meta.PercentualRecebimento >= 80 ? "warning" : "danger")) text-white">
+                        <h5 class="card-title mb-0">@meta.MetaNome</h5>
+                        <small class="text-white-50">@meta.EntidadeNome (@meta.OrgaoSigla) - Contrato: @meta.DocumentoContratualNumero</small>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text mb-1"><strong>Volume Pactuado Mensal:</strong> @meta.VolumePactuadoMensal.ToString("N0")</p>
+                        <p class="card-text mb-1"><strong>Total Atingido no Mês:</strong> @meta.TotalAtingidoMes.ToString("N0")</p>
+                        <p class="card-text h4 text-primary mb-2"><strong>% Meta Atingida:</strong> @meta.PercentualMetaAtingida.ToString("N2")%</p>
+                        <hr/>
+                        <p class="card-text mb-1"><strong>Valor da Meta no Contrato:</strong> @meta.ValorMetaNoContrato.ToString("C")</p>
+                        <p class="card-text mb-1"><strong>% de Recebimento:</strong> <span class="h5 text-@((meta.PercentualRecebimento == 100) ? "success" : "danger")">@meta.PercentualRecebimento.ToString("N2")%</span></p>
+                        <p class="card-text h4 text-@((meta.ValorDescontadoDaMeta > 0) ? "danger" : "success") mb-2"><strong>Valor Recebido:</strong> @meta.ValorRecebidoDaMeta.ToString("C")</p>
+                        @if (meta.ValorDescontadoDaMeta > 0)
+                        {
+                            <p class="card-text text-danger"><strong>Desconto:</strong> @meta.ValorDescontadoDaMeta.ToString("C")</p>
+                        }
+                    </div>
+                    <div class="card-footer text-muted">
+                        <small>Última atualização: @DateTime.Now.ToString("dd/MM/yyyy HH:mm")</small>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+
+@section Scripts {
+    <script>
+        // Scripts para encadear dropdowns (Opcional - pode ser JS ou AJAX)
+        // Isso é mais complexo e pode ser feito com uma chamada AJAX
+        // para popular Entidades quando um Órgão é selecionado, e
+        // DocumentosContratuais quando uma Entidade é selecionada.
+        // Por enquanto, os onchange="this.form.submit()" vão recarregar a página.
+
+        // Você pode melhorar o onchange para submeter apenas os filtros de Entidade e Contrato
+        // sem ter que recarregar a página toda para Mês/Ano.
+        // Exemplo: Usar jQuery para interceptar o onchange e atualizar via AJAX
+        // Ou, para simplificar por enquanto, mantenha o this.form.submit()
+    </script>
+}
